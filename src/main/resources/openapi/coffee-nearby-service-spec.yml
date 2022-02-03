@@ -1,0 +1,129 @@
+openapi: '3.0.8'
+
+info:
+  version: 0.0.1
+  title: Coffee nearby
+  description: REST API meant to provide users nearby coffee shops
+  contact:
+    name: Leon Velicea
+    email: velicealeon@gmail.com
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /search-for-coffee:
+    get:
+      description: Searches for coffee shops nearby
+      operationId: searchForCoffeeShops
+      tags:
+        - Coffee
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            format: double
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            format: double
+        - name: distance
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          $ref: '#/components/responses/CoffeeShopLocations'
+        204:
+          description: No data found for provided location
+        400:
+          description: Bad request, one or all the params are missing
+        500:
+          description: In case something goes south
+
+components:
+  schemas:
+    CoffeeShopDTO:
+      type: object
+      description: Coffee shop transfer object
+      properties:
+        location:
+          description: Coffee shop coordinates
+          type: string
+        name:
+          description: Coffee shop name
+          type: string
+        distance:
+          description: Distance towards the coffee shop
+          type: number
+          format: double
+        address:
+          $ref: "#/components/schemas/AddressDTO"
+        social:
+          $ref: "#/components/schemas/SocialDTO"
+        schedule:
+          $ref: "#/components/schemas/ScheduleDTO"
+
+    AddressDTO:
+      type: object
+      description: Location address transfer object
+      properties:
+        street:
+          description: Street name
+          type: string
+        number:
+          description: Street number
+          type: string
+        postalCode:
+          description: Postal code
+          type: string
+          format: ^\d{6}$
+
+    SocialDTO:
+      type: object
+      description: Social media of a coffee shop
+      properties:
+        instagram:
+          description: Instagram URL
+          type: string
+        facebook:
+          description: Facebook URL
+          type: string
+        tripAdvisor:
+          description: Trip advisor URL
+          type: string
+        email:
+          description: Email address
+          type: string
+        telephone:
+          description: Telephone
+          type: string
+
+    # this would be more complex as a schedule, but for the sake of simplicity I will leave it like this
+    ScheduleDTO:
+      type: object
+      description: Social media of a coffee shop
+      properties:
+        openHour:
+          description: Opening hour
+          type: string
+        closeHour:
+          description: Closing hour
+          type: string
+
+  responses:
+    CoffeeShopLocations:
+      description: List of coffee shops nearby
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/CoffeeShopDTO'
+            

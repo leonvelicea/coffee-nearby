@@ -1,0 +1,22 @@
+{
+  "apiPackage": "org.dev.test.generated.api",
+  "invokerPackage": "org.dev.test.generated",
+  "modelPackage": "org.dev.test.generated.model",
+  "library": "spring-boot",
+  "useBeanValidation": true,
+  "useTags": true,
+  "serializableModel": true,
+  "hideGenerationTimestamp": true,
+  "interfaceOnly": true,
+  "skipDefaultInterface": true,
+  "generateSupportingFiles": true,
+  "addCompileSourceRoot": true,
+  "openApiNullable": false,
+  "booleanGetterPrefix": "is",
+  "dateLibrary": "java8-localdatetime",
+  "globalProperties": {
+    "apis": "",
+    "models": "",
+    "modelDocs": false
+  }
+}
