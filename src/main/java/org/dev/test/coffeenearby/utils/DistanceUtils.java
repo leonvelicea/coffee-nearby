@@ -1,5 +1,7 @@
 package org.dev.test.coffeenearby.utils;
 
+import java.math.MathContext;
+
 public final class DistanceUtils {
 
     private DistanceUtils(){
@@ -8,16 +10,18 @@ public final class DistanceUtils {
 
     /**
      * default distance value used if no value is passed from the API
-     * value is expressed in km
+     * value is expressed in m
      */
-    public static int DEFAULT_DISTANCE = 5;
+    public static int DEFAULT_DISTANCE = 5000;
+
+    public static MathContext ROUND_MATH_CONTEXT = new MathContext(5);
 
     /**
      * Calculate distance between two points; value that represents distance in meters
-     * @param lat1
-     * @param lon1
-     * @param lat2
-     * @param lon2
+     * @param lat1 latitude of point 1
+     * @param lon1 longitude of point 1
+     * @param lat2 latitude of point 2
+     * @param lon2 longitude of point 2
      * @return a value in double
      */
     public static double calculateDistance (double lat1, double lon1,

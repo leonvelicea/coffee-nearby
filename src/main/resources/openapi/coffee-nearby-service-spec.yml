@@ -65,8 +65,8 @@ components:
           format: double
         address:
           $ref: "#/components/schemas/AddressDTO"
-        social:
-          $ref: "#/components/schemas/SocialDTO"
+        socialData:
+          $ref: "#/components/schemas/SocialDataDTO"
         schedule:
           $ref: "#/components/schemas/ScheduleDTO"
 
@@ -74,6 +74,12 @@ components:
       type: object
       description: Location address transfer object
       properties:
+        country:
+          description: country name
+          type: string
+        city:
+          description: city name
+          type: string
         street:
           description: Street name
           type: string
@@ -85,17 +91,17 @@ components:
           type: string
           format: ^\d{6}$
 
-    SocialDTO:
+    SocialDataDTO:
       type: object
       description: Social media of a coffee shop
       properties:
-        instagram:
+        instagramUrl:
           description: Instagram URL
           type: string
-        facebook:
+        facebookUrl:
           description: Facebook URL
           type: string
-        tripAdvisor:
+        tripAdvisorUrl:
           description: Trip advisor URL
           type: string
         email:

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity(name = "addresses")
 @AllArgsConstructor
@@ -36,4 +37,13 @@ public class Address {
     @JoinColumn(name = "coffee_shop_id")
     private CoffeeShop coffeeShop;
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, country, city, street, number, postalCode);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof CoffeeShop && Objects.equals(obj, this));
+    }
 }

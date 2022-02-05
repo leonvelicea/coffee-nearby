@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS Postgis;
+
 create table addresses (
     id  bigserial not null,
     city varchar(150) not null,

@@ -12,8 +12,15 @@ spring:
   # JPA configuration
   jpa:
     # PotGIS configuration
-    database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
+    database-platform: org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
     database: postgresql
+springdoc:
+  swagger-ui:
+    path: /swagger-ui-custom.html
+    operationsSorter: method

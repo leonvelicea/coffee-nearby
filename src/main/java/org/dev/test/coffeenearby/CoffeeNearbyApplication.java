@@ -3,7 +3,7 @@ package org.dev.test.coffeenearby;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication(scanBasePackages = {"org.dev.test.coffeenearby.mappers"})
+@SpringBootApplication
 public class CoffeeNearbyApplication {
 
 	public static void main(String[] args) {

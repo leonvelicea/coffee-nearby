@@ -1,6 +1,7 @@
 package org.dev.test.coffeenearby.data.model;
 
-import com.vividsolutions.jts.geom.Point;
+import org.locationtech.jts.geom.Point;
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +25,9 @@ public class CoffeeShop {
     @OneToOne(mappedBy = "coffeeShop", cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
 
-    @Column(columnDefinition = "geography")
+    @OneToOne(mappedBy = "coffeeShop", cascade = CascadeType.ALL, orphanRemoval = true)
+    private SocialData socialData;
+
     private Point geoLocation;
 
     @Override
@@ -34,6 +37,6 @@ public class CoffeeShop {
 
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof CoffeeShop && Objects.equals(((CoffeeShop) obj), this));
+        return (obj instanceof CoffeeShop && Objects.equals(obj, this));
     }
 }
