@@ -27,6 +27,6 @@ public class CoffeeShopRequestValidator {
     }
 
     private void throwNotFoundException(String parameterName) {
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Parameter \"%s\" is mandatory", parameterName));
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, String.format("Parameter \"%s\" is mandatory", parameterName));
     }
 }

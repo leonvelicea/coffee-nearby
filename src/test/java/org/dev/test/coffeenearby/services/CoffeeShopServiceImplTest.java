@@ -92,33 +92,31 @@ class CoffeeShopServiceImplTest {
     private List<CoffeeShop> getCoffeeShopsFromDb() {
         CoffeeShop coffeeShop = new CoffeeShop();
         coffeeShop.setName(TEST_COFFEE_SHOP_NAME);
-        coffeeShop.setAddress(getAddress(coffeeShop));
-        coffeeShop.setSocialData(getSocialData(coffeeShop));
+        coffeeShop.setAddress(getAddress());
+        coffeeShop.setSocialData(getSocialData());
         coffeeShop.setGeoLocation(geometryFactory.createPoint(new Coordinate(47.159146, 27.572409)));
         return List.of(coffeeShop);
     }
 
     @NotNull
-    private SocialData getSocialData(CoffeeShop coffeeShop) {
+    private SocialData getSocialData() {
         SocialData socialData = new SocialData();
         socialData.setEmail(TEST_EMAIL);
         socialData.setTelephone(TEST_TELEPHONE);
         socialData.setFacebookUrl(TEST_FACEBOOK_URL);
         socialData.setInstagramUrl(TEST_INSTAGRAM_URL);
         socialData.setTripAdvisorUrl(TEST_TRIP_ADVISOR_URL);
-        socialData.setCoffeeShop(coffeeShop);
         return socialData;
     }
 
     @NotNull
-    private Address getAddress(CoffeeShop coffeeShop) {
+    private Address getAddress() {
         Address address = new Address();
         address.setNumber(TEST_STREET_NUMBER);
         address.setStreet(TEST_STREET_NAME);
         address.setCity(TEST_CITY_NAME);
         address.setCountry(TEST_COUNTRY_NAME);
         address.setPostalCode(TEST_POSTAL_CODE);
-        address.setCoffeeShop(coffeeShop);
         return address;
     }
 }

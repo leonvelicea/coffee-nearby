@@ -22,10 +22,10 @@ public class CoffeeShop {
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @OneToOne(mappedBy = "coffeeShop", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
 
-    @OneToOne(mappedBy = "coffeeShop", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private SocialData socialData;
 
     private Point geoLocation;

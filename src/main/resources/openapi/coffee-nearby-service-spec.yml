@@ -111,6 +111,14 @@ components:
           description: Telephone
           type: string
 
+    CoffeeShopsNearby:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoffeeShopDTO'
+
     # this would be more complex as a schedule, but for the sake of simplicity I will leave it like this
     ScheduleDTO:
       type: object
@@ -129,7 +137,5 @@ components:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/CoffeeShopDTO'
+            $ref: '#/components/schemas/CoffeeShopsNearby'
             

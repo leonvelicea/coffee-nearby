@@ -32,11 +32,6 @@ public class Address {
     @Column(name = "postal_code", nullable = false, length = 20)
     private String postalCode;
 
-    /** Coffee shop instance */
-    @OneToOne
-    @JoinColumn(name = "coffee_shop_id")
-    private CoffeeShop coffeeShop;
-
     @Override
     public int hashCode() {
         return Objects.hash(id, country, city, street, number, postalCode);

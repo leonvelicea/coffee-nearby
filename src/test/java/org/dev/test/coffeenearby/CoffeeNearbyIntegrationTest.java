@@ -2,6 +2,7 @@ package org.dev.test.coffeenearby;
 
 import org.dev.test.coffeenearby.data.repositories.CoffeeShopRepository;
 import org.dev.test.generated.model.CoffeeShopDTO;
+import org.dev.test.generated.model.CoffeeShopsNearby;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.locationtech.jts.geom.GeometryFactory;
@@ -19,6 +20,8 @@ import org.springframework.web.client.RestTemplate;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,7 +54,7 @@ public class CoffeeNearbyIntegrationTest {
     @Test
     public void testGetCoffeeShopsNearby_NoContent() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<CoffeeShopDTO[]> response = restTemplate.getForEntity(String.format(TEST_GET_COFFEE_SHOPS_APP_URL, randomServerPort, 47.146836, 27.583606), CoffeeShopDTO[].class);
+        ResponseEntity<CoffeeShopsNearby> response = restTemplate.getForEntity(String.format(TEST_GET_COFFEE_SHOPS_APP_URL, randomServerPort, 47.146836, 27.583606), CoffeeShopsNearby.class);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
@@ -59,14 +62,15 @@ public class CoffeeNearbyIntegrationTest {
     @Sql("test_data.sql")
     public void testGetCoffeeShopsNearby_Success() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<CoffeeShopDTO[]> response = restTemplate.getForEntity(String.format(TEST_GET_COFFEE_SHOPS_APP_URL, randomServerPort, 45.643423, 25.592810), CoffeeShopDTO[].class);
+        ResponseEntity<CoffeeShopsNearby> response = restTemplate.getForEntity(String.format(TEST_GET_COFFEE_SHOPS_APP_URL, randomServerPort, 45.643423, 25.592810), CoffeeShopsNearby.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        CoffeeShopDTO[] coffeeShops = response.getBody();
-        assertNotNull(coffeeShops);
-        assertEquals(3, coffeeShops.length);
-        CoffeeShopDTO coffeeShop = coffeeShops[0];
+        assertNotNull(response.getBody());
+        assertTrue(response.getBody().getData().size() > 0);
+        List<CoffeeShopDTO> coffeeShops = response.getBody().getData();
+        assertEquals(3, coffeeShops.size());
+        CoffeeShopDTO coffeeShop = coffeeShops.get(0);
         assertEquals("Coffee shop 1", coffeeShop.getName());
-        assertTrue(coffeeShops[0].getDistance() < coffeeShops[1].getDistance());
-        assertTrue(coffeeShops[1].getDistance() < coffeeShops[2].getDistance());
+        assertTrue(coffeeShops.get(0).getDistance() < coffeeShops.get(1).getDistance());
+        assertTrue(coffeeShops.get(1).getDistance() < coffeeShops.get(2).getDistance());
     }
 }

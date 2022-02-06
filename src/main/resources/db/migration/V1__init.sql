@@ -7,13 +7,6 @@ create table addresses (
     number varchar(50) not null,
     postal_code varchar(20) not null,
     street varchar(150) not null,
-    coffee_shop_id int8,
-    primary key (id)
-);
-create table coffee_shops (
-    id  bigserial not null,
-    geo_location geography,
-    name varchar(100) not null,
     primary key (id)
 );
 create table social_data (
@@ -23,9 +16,16 @@ create table social_data (
     instagram_url varchar(255),
     telephone varchar(15) not null,
     trip_advisor_url varchar(255),
-    coffee_shop_id int8,
     primary key (id)
 );
 
-alter table addresses add constraint address_coffee_shop_fk foreign key (coffee_shop_id) references coffee_shops;
-alter table social_data add constraint social_data_coffee_shop_fk foreign key (coffee_shop_id) references coffee_shops;
+create table coffee_shops (
+      id  bigserial not null,
+      geo_location geography,
+      name varchar(100) not null,
+      address_id int8,
+      social_data_id int8,
+      primary key (id),
+      CONSTRAINT coffee_shop_address_fk FOREIGN KEY (address_id) REFERENCES addresses(id),
+      CONSTRAINT coffee_shop_social_data_fk FOREIGN KEY (social_data_id) REFERENCES social_data(id)
+);

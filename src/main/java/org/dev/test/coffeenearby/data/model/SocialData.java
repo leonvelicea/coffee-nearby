@@ -35,11 +35,6 @@ public class SocialData {
     @Column(name = "trip_advisor_url")
     private String tripAdvisorUrl;
 
-    /** Coffee shop instance */
-    @OneToOne
-    @JoinColumn(name = "coffee_shop_id")
-    private CoffeeShop coffeeShop;
-
     @Override
     public int hashCode() {
         return Objects.hash(id, telephone, email, instagramUrl, facebookUrl, tripAdvisorUrl);
